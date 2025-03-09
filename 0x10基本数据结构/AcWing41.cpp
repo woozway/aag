@@ -3,19 +3,19 @@ class MinStack {
 public:
 
   void push(int x) {
-      a.push(x);
-      b.empty() ? b.push(x) : b.push(min(b.top(), x));
+    a.push(x);
+    b.empty() ? b.push(x) : b.push(min(b.top(), x));
   }
   
   void pop() {
-      a.pop(), b.pop();
+    a.pop(), b.pop();
   }
   
   int top() {
-      return a.top();
+    return a.top();
   }
   
   int getMin() {
-      return b.top();
+    return b.top();
   }
 };
