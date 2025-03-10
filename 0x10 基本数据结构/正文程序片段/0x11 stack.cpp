@@ -1,6 +1,6 @@
 // 递归法求中缀表达式的值，O(n^2)
 int calc(int l, int r) {
-  // 寻找未被任何括号包含的最后一个加减号
+  // 寻找未被任何括号包含的最后一个加减号。j=0表示肯定在括号外面，因为j--和j++对应
   for (int i = r, j = 0; i >= l; i--) {
     if (s[i] == '(') j++;
     if (s[i] == ')') j--;
@@ -15,7 +15,7 @@ int calc(int l, int r) {
     if (j == 0 && s[i] == '/') return calc(l, i - 1) / calc(i + 1, r);
   }
   // 首尾是括号
-  if (s[l] == '('&&s[r] == ')') return calc(l + 1, r - 1);
+  if (s[l] == '(' && s[r] == ')') return calc(l + 1, r - 1);
   // 是一个数
   int ans = 0;
   for (int i = l; i <= r; i++) ans = ans * 10 + s[i] - '0';
@@ -24,11 +24,8 @@ int calc(int l, int r) {
 
 // ----------------------------------------------------
 // 中缀表达式转后缀表达式，同时求值，O(n)
-
-// 数值栈 
-vector<int> nums; 
-// 运算符栈 
-vector<char> ops;
+vector<int> nums; // 数值栈
+vector<char> ops; // 运算符栈
 
 // 优先级 
 int grade(char op) {
@@ -120,7 +117,7 @@ for (int i = 1; i <= n + 1; i++) {
   if (a[i] > s[p]) {
     s[++p] = a[i], w[p] = 1;
   } else {
-    int width=0;
+    int width = 0;
     while (s[p] > a[i]) {
       width += w[p];
       ans = max(ans, (long long)width * s[p]);
