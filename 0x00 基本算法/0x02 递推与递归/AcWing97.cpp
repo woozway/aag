@@ -16,7 +16,7 @@ ll ksm(ll a, ll b) {
   }
   return ans;
 }
-// 计算1+p+p**2+..+p**c
+// 计算：1 + p + p^2 + .. + p^c
 ll get_sum(ll p, ll c) {
   if (!p) return 0; // 0也可能是约数
   if (!c) return 1;
