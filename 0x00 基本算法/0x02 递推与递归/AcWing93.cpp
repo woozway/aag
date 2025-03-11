@@ -23,7 +23,7 @@ int main() {
   while (top) {
     int x = stk[top-2]; // call中放入栈的参数x
     switch (address) {
-    case 0: //对应原递归函数入口
+    case 0: // 对应原递归函数入口
       if (chosen.size()>m || chosen.size()+(n-x+1)<m) {
         address = ret();
         continue;
@@ -44,7 +44,7 @@ int main() {
       call(x+1, 2); // 相当于calc(x+1)，返回后从case 2继续
       address = 0;
       continue; // 开启不选x的新递归
-    case 2: //对应原递归函数在不选择x之后
+    case 2: // 对应原递归函数在不选择x之后
       address = ret();
     }
   }
