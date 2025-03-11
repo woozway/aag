@@ -7,7 +7,7 @@ int calc(int l, int r) {
     if (j == 0 && s[i] == '+') return calc(l, i - 1) + calc(i + 1, r);
     if (j == 0 && s[i] == '-') return calc(l, i - 1) - calc(i + 1, r);
   }
-  // 寻找未被任何括号包含的最后一个乘除号
+  // 寻找未被任何括号包含的最后一个乘除号。这里先找+-再*/因为后者优先级更高
   for (int i = r, j = 0; i >= l; i--) {
     if (s[i] == '(') j++;
     if (s[i] == ')') j--;
