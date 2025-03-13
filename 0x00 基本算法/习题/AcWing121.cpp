@@ -30,7 +30,6 @@ int main() {
     xx[p[i].x]++;
     yy[p[i].y]++;
   }
-  
   for (int i=1; i<=10000; i++) {
     if (xx[i]) x[++tx] = i; // x[j]表示离散化后对应原始三叶草的横坐标
     xx[i] = tx; // 此时xx[i]表示原始三叶草横坐标i所对应的离散化后的横坐标
@@ -39,7 +38,7 @@ int main() {
   }
   for (int i=1; i<=n; i++) s[xx[p[i].x]][yy[p[i].y]]++;
   for (int i=1; i<=tx; i++) // 完成离散化后的前缀数组
-    for(int j=1; j<=ty; j++)
+    for (int j=1; j<=ty; j++)
       s[i][j] += s[i-1][j] + s[i][j-1] - s[i-1][j-1];
   int l = 1, r = 10000;
   while (l < r) {
