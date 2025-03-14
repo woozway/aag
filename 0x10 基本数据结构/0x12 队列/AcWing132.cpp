@@ -9,9 +9,10 @@ queue<int> q[T];
 void Team_Queue() {
   q[0] = queue<int>();
   for (int i=1; i<=t; i++) {
-    int n, x;
+    int n;
     cin >> n;
     while (n--) {
+      int x;
       cin >> x;
       f[x] = i;
     }
