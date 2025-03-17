@@ -4,7 +4,6 @@ a = [[0]*2 for _ in range(N)]
 p = [[] for _ in range(N)]
 
 def main():
-    global a, p
     n = int(input())
     for i in range(1, n+1):
         a[i] = int(input()), i
@@ -15,8 +14,7 @@ def main():
         while a[i][0] == a[i+1][0]:
             i += 1; p[t].append(a[i][1])
         i += 1
-    flag = 0
-    num, ans = inf, 1
+    flag, num, ans = 0, inf, 1
     for i in range(1, t+1):
         s = len(p[i])
         if flag:
