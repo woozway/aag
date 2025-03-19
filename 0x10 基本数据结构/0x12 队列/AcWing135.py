@@ -5,8 +5,7 @@ q, s = [0]*N, [0]*N
 def main():
     n, m = [int(x) for x in input().split()]
     s[1:n+1] = [int(x) for x in input().split()]
-    for i in range(1, n+1):
-        s[i] += s[i-1]
+    for i in range(1, n+1): s[i] += s[i-1]
     ans, l, r = -inf, 1, 1
     q[1] = 0
     for i in range(1, n+1):
