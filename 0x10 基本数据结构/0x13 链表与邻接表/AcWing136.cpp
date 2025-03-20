@@ -30,7 +30,7 @@ int main() {
     a[i].nxt = i + 1;
   }
   // 倒着从n->1，因为对于第An个数，可以从前面所有的数中找Aj，完成后删除节点
-  a[0].a = -INF, a[n+1].a = INF;
+  a[0].a = -INF, a[n+1].a = INF; // 设立哨兵head, tail，降低编码难度
   for (int i=n; i>1; i--) {
     ans[i].x = a[a[b[i]].nxt].a - a[b[i]].a;
     ans[i].k = a[a[b[i]].nxt].w;
