@@ -8,11 +8,11 @@ char s[N];
 ull f1[N], f2[N], p[N]; // p[i]表示13331^i
 
 ull H1(int i, int j) {
-  return (f1[j] - f1[i-1]*p[j-i+1]);
+  return f1[j] - f1[i-1]*p[j-i+1];
 }
 
 ull H2(int i, int j) {
-  return (f2[i] - f2[j+1]*p[j-i+1]);
+  return f2[i] - f2[j+1]*p[j-i+1];
 }
 
 int main() {
