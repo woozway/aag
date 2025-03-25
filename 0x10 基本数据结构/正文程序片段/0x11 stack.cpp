@@ -45,10 +45,8 @@ int grade(char op) {
 // 处理后缀表达式中的一个运算符 
 void calc(char op) {
   // 从栈顶取出两个数 
-  int y = *nums.rbegin();
-  nums.pop_back();
-  int x = *nums.rbegin();
-  nums.pop_back();
+  int y = *nums.rbegin(); nums.pop_back();
+  int x = *nums.rbegin(); nums.pop_back();
   int z;
   switch (op) {
   case '+': z = x + y; break;
