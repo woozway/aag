@@ -51,18 +51,10 @@ void calc(char op) {
   nums.pop_back();
   int z;
   switch (op) {
-  case '+':
-    z = x + y;
-    break;
-  case '-':
-    z = x - y;
-    break;
-  case '*':
-    z = x * y;
-    break;
-  case '/':
-    z = x / y;
-    break;
+  case '+': z = x + y; break;
+  case '-': z = x - y; break;
+  case '*': z = x * y; break;
+  case '/': z = x / y; break;
   }
   // 把运算结果放回栈中 
   nums.push_back(z);	
