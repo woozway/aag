@@ -22,13 +22,17 @@ for (int i = 1, j = 0; i <= m; i++) { // 这里j是在建立B和A的对应关系
 }
 
 
-// 最小表示法
+// 最小表示法：找循环同构的n个字符串中字典序最小的一个
+// B[i]表示从i开始的循环同构字符串，即：S[i~n] + S[1~i-1]
+// 可通过拼接SS，则B[i]=SS[i~i+n-1]
 int n = strlen(s + 1);
 for (int i = 1; i <= n; i++) s[n+i] = s[i];
-int i = 1, j = 2, k;
+int i = 1, j = 2, k; // 初始化
 while (i <= n && j <= n) {
+  // 1. 如果扫描了n个字符后B[i]与B[j]仍然相等，说明S有更小的循环元
   for (k = 0; k < n && s[i+k] == s[j+k]; k++);
-  if (k == n) break; // s likes "aaaaa"
+  if (k == n) break; // s形如"catcat"，它的循环元已扫描完成
+  // 2. 如果在i+k与j+k处发现不相等
   if (s[i+k] > s[j+k]) {
     i = i + k + 1;
     if (i == j) i++;
@@ -37,4 +41,4 @@ while (i <= n && j <= n) {
     if (i == j) j++;
   }
 }
-ans = min(i, j);
+ans = min(i, j); // B[ans]是最小表示
