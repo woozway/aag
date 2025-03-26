@@ -31,7 +31,7 @@ int i = 1, j = 2, k; // 初始化
 while (i <= n && j <= n) {
   // 1. 如果扫描了n个字符后B[i]与B[j]仍然相等，说明S有更小的循环元
   for (k = 0; k < n && s[i+k] == s[j+k]; k++);
-  if (k == n) break; // s形如"catcat"，它的循环元已扫描完成
+  if (k == n) break; // s形如"aaa"时，它的循环元已扫描完成
   // 2. 如果在i+k与j+k处发现不相等
   if (s[i+k] > s[j+k]) {
     i = i + k + 1;
