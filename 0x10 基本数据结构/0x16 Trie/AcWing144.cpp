@@ -47,7 +47,7 @@ void The_xor_longest_Path() {
       p = trie[p][k];
     }
     p = 1;
-    if (i) {
+    if (i) { // 这里不是i>1，因为节点从0开始（和AcWing143相比）
       int w = 0;
       for (int j=31; j>=0; j--) {
         int k = (d[i] >> j) & 1;
