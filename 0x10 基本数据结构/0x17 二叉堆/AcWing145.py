@@ -4,16 +4,12 @@ n, a, q = 0, [[0]*2 for _ in range(N)], []
     
 def rd(t):
     global n
-    while len(t) < 2*n:
-        t.extend([int(x) for x in input().split()])
-    for i in range(1, n+1):
-        a[i] = t[2*(i-1)+1], t[2*(i-1)]
+    while len(t) < 2*n: t.extend([int(x) for x in input().split()])
+    for i in range(1, n+1): a[i] = t[2*(i-1)+1], t[2*(i-1)]
     
-def Supermarket(s):
+def Supermarket(t):
     global n
-    t = [int(x) for x in s.split()]
-    n = t[0]
-    rd(t[1:])
+    n = t[0]; rd(t[1:])
     a[1:n+1] = sorted(a[1:n+1], key=lambda x: x[0])
     for i in range(1, n+1):
         if a[i][0]==len(q) and q[0]<a[i][1]:
@@ -32,7 +28,7 @@ def main():
         try:
             line = input()
             if line.strip() == "": continue
-            Supermarket(line)
+            Supermarket([int(x) for x in line.split()])
         except EOFError:
             break
 
