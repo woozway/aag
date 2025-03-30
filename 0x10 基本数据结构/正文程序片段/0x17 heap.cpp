@@ -9,6 +9,15 @@ void up(int p) { // 向上调整
     else break;
   }	
 }
+// 新节点放在二叉堆数组末尾，通过交换向上调整
+void Insert(int val) {
+  heap[++n] = val;
+  up(n);
+}
+
+int GetTop() {
+  return heap[1];
+}
 
 void down(int p) {
   int s = p * 2; // p的左子节点
@@ -20,15 +29,6 @@ void down(int p) {
     }
     else break;
   }
-}
-// 新节点放在二叉堆数组末尾，通过交换向上调整
-void Insert(int val) {
-  heap[++n] = val;
-  up(n);
-}
-
-int GetTop() {
-  return heap[1];
 }
 // 把堆顶heap[1]与末尾节点交换，然后移除末尾节点；向下调整
 void Extract() {
