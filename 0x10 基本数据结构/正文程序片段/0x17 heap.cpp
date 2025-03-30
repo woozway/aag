@@ -23,7 +23,7 @@ void down(int p) {
   int s = p * 2; // p的左子节点
   while (s <= n) {
     if (s<n && heap[s]<heap[s+1]) s++; // 左右子节点取较大者
-    if (heap[s] > heap[p]) { // 子节点大于腹肌诶单，不满足大根堆性质
+    if (heap[s] > heap[p]) { // 子节点大于父节点，不满足大根堆性质
       swap(heap[s], heap[p]);
       p = s, s = p * 2;
     }
