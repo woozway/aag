@@ -18,7 +18,7 @@ void merge() {
     auto t = q.top(); q.pop();
     int s = t.first, p = t.second;
     c[i] = s;
-    q.push({s-a[p]+a[p+1], p+1});
+    q.push({s-a[p]+a[p+1], p+1}); // b[k]=s-a[p]，k即代表nxn矩阵中的哪一行
   }
   for (int i=1; i<=n; i++) a[i] = c[i];
 
