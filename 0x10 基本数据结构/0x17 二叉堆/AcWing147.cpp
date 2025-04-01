@@ -83,7 +83,7 @@ int main() {
 
 // // @yxc
 // #include <iostream>
-// #include <set>
+// #include <set> // 对应python3中的sortedcontainers.SortedSet
 // using namespace std;
 // typedef long long ll;
 // typedef pair<ll, int> pli;
@@ -92,35 +92,33 @@ int main() {
 // ll d[N];
 
 // void delete_node(int p) {
-//   r[l[p]] = r[p];
-//   l[r[p]] = l[p];
+//   r[l[p]] = r[p], l[r[p]] = l[p];
 // }
 
 // int main() {
 //   cin >> n >> k;
 //   for (int i=0; i<n; i++) cin >> d[i];
-//   for (int i=n-1; ~i; i--) d[i] -= d[i-1];
-//   set<pli> s;
-//   d[0] = d[n] = 1e15;
-//   for (int i=0; i<=n; i++) {
-//     l[i] = i-1;
-//     r[i] = i+1;
-//     if (i>=1 && i<n) s.insert({d[i], i});
+//   for (int i=n-1; i; i--) d[i] -= d[i-1]; // 获取n-1个相邻的差d[i]
+  
+//   set<pli> s; // c++中的set有序，可以当作带增删操作的二叉堆使用
+//   d[0] = d[n] = 1e15; // 头尾哨兵
+//   for (int i=1; i<n; i++) {
+//     l[i] = i-1, r[i] = i+1; // l[i]记录双向链表中i节点的左侧是i-1, r同理
+//     s.insert({d[i], i}); // 插入邻差d和在双向链表中的下标i
 //   }
-//   ll res = 0;
+//   ll ans = 0;
 //   while (k--) {
-//     auto it = s.begin();
+//     auto it = s.begin(); // 取出堆顶元素
 //     ll v = it->first;
 //     int p = it->second, left = l[p], right = r[p];
-    
-//     s.erase(it);
-//     s.erase({d[left], left}), s.erase({d[right], right});
+//     // 堆中Di, D_i-1及D_i+1，然后
+//     s.erase(it), s.erase({d[left], left}), s.erase({d[right], right});
 //     delete_node(left), delete_node(right);
-//     res += v;
-
+//     ans += v;
+//     // 因为还要把d[left]+d[right]-d[p]插入到链表中，所以上一步没有delete_node(p)
 //     d[p] = d[left] + d[right] - d[p];
 //     s.insert({d[p], p});
 //   }
-//   cout << res << endl;
+//   cout << ans << endl;
 //   return 0;
 // }
