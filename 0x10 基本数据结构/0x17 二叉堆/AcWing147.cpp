@@ -115,7 +115,7 @@ int main() {
 //     s.erase(it), s.erase({d[left], left}), s.erase({d[right], right});
 //     delete_node(left), delete_node(right);
 //     ans += v;
-//     // 因为还要把d[left]+d[right]-d[p]插入到链表中，所以上一步没有delete_node(p)
+//     // 因为还要把D_i-1+D_i+1+Di插入到链表位置p，所以上一步没有delete_node(p)
 //     d[p] = d[left] + d[right] - d[p];
 //     s.insert({d[p], p});
 //   }
