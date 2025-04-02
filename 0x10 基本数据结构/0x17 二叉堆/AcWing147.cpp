@@ -111,7 +111,7 @@ int main() {
 //     auto it = s.begin(); // 取出堆顶元素
 //     ll v = it->first;
 //     int p = it->second, left = l[p], right = r[p];
-//     // 堆中Di, D_i-1及D_i+1，然后
+//     // 删除堆中Di, D_i-1及D_i+1
 //     s.erase(it), s.erase({d[left], left}), s.erase({d[right], right});
 //     delete_node(left), delete_node(right);
 //     ans += v;
