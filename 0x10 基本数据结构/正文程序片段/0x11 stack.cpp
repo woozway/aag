@@ -105,7 +105,7 @@ int solve(string s) {
 a[n + 1] = p = 0; // 首末尾增加高度为0的矩形，以免扫描结束后栈中有剩余
 for (int i = 1; i <= n + 1; i++) {
   if (a[i] > s[p]) {
-    s[++p] = a[i], w[p] = 1;
+    s[++p] = a[i], w[p] = 1; // s是栈，p是栈顶指针top，w[p]是对应矩阵宽度
   } else {
     int width = 0;
     while (s[p] > a[i]) { // 这里必须是>，否则因为a[n+1]=0时会越界
