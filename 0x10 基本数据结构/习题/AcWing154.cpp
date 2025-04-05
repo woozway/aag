@@ -7,7 +7,7 @@ int main() {
   cin >> n >> k;
   for (int i=1; i<=n; i++) cin >> a[i];
 
-  int l = 1, r = 0; // l<=r表示队列q中有数
+  int l = 1, r = 0; // l<=r表示队列q中有元素
   for (int i=1; i<=n; i++) {
     while (l<=r && q[l]<=i-k) l++;
     while (l<=r && a[q[r]]>=a[i]) r--;
