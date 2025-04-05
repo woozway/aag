@@ -11,7 +11,8 @@ int main() {
   for (int i=1; i<=n; i++) {
     while (l<=r && q[l]<=i-k) l++;
     while (l<=r && a[q[r]]>=a[i]) r--;
-    q[++r] = i; // 入队后，这里q成了单调队列
+    q[++r] = i; // 入队后，这里q是单调队列
+    // 注意这里是入队之后找最小/大值，因为入队前后q[l]可能会变，区别于AcWing135
     if (i >= k) printf("%d ", a[q[l]]);
   }
   puts("");
