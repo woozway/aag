@@ -7,7 +7,7 @@ def main():
     s[1:n+1] = [int(x) for x in input().split()]
     for i in range(1, n+1): s[i] += s[i-1]
     ans, l, r = -inf, 1, 1
-    q[1] = 0
+    q[l] = 0
     for i in range(1, n+1):
         while l<=r and q[l]<i-m: l += 1
         ans = max(ans, s[i] - s[q[l]])
