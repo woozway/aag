@@ -18,7 +18,7 @@ int ddz(int k) {
         width += w[p];
         ans = max(ans,  width * s[p--]);
       }
-      s[++p] = h[i], w[p] = width + 1;
+      s[++p] = h[i], w[p] = width+1;
     }
   return ans;
 }
@@ -30,6 +30,6 @@ int main() {
       cin >> a[i][j];
   int ans = 0; // 遍历每一行，调用单调栈计算最大矩形面积
   for (int i=1; i<=n; i++) ans = max(ans, ddz(i));
-  cout << 3 * ans << endl;
+  cout << 3*ans << endl;
   return 0;
 }

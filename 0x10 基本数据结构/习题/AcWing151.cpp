@@ -29,13 +29,13 @@ int main() {
     if (s[i] == '(') l++;
     if (s[i] == ')') r++;
   }
-  if (l >= r) s.append(l - r, ')');
-  else s = string(r - l, '(') + s;
+  if (l >= r) s.append(l-r, ')');
+  else s = string(r-l, '(') + s;
   for (int i=0; i<s.size(); i++) {
     if (isdigit(s[i])) {
       int j = i, t = 0;
       while (isdigit(s[j])) t = t*10 + s[j++]-'0';
-      i = j - 1;
+      i = j-1;
       nums.push(t);
     } else {
       char c = s[i];
@@ -51,7 +51,7 @@ int main() {
           else {
             int j = i+1, t = 0;
             while (isdigit(s[j])) t = t*10 + s[j++]-'0';
-            i = j - 1;
+            i = j-1;
             nums.push(-t);
           }
         } else { // +-优先级最低，若栈中有其他运算符，直接计算

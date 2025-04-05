@@ -25,7 +25,7 @@ def main():
         if s[i].isdigit():
             j, t = i, 0
             while s[j].isdigit(): t = t*10 + ord(s[j])-ord('0'); j += 1
-            i = j - 1
+            i = j-1
             nums.append(t)
         else:
             c = s[i]
@@ -40,7 +40,7 @@ def main():
                     else:
                         j, t = i+1, 0
                         while s[j].isdigit(): t = t*10 + ord(s[j])-ord('0'); j += 1
-                        i = j - 1
+                        i = j-1
                         nums.append(-t)
                 else:
                     while ops[-1] != '(': calc()

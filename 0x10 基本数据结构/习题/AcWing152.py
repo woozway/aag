@@ -16,7 +16,7 @@ def ddz(k):
                 width += w[p]
                 ans = max(ans, width * s[p])
                 p -= 1
-            p += 1; s[p] = h[i]; w[p] = width + 1
+            p += 1; s[p] = h[i]; w[p] = width+1
     return ans
     
 def main():
