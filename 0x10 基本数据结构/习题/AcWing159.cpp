@@ -9,7 +9,7 @@ bool st[M];
 int main() {
   cin >> n >> m;
   memset(st, 1, sizeof st); // st[i]==1说明长度为i的循环节可以覆盖
-  for (int i=1; i<=n; i++) { // 判断每个字符串中宽度j的循环节是否可行
+  for (int i=1; i<=n; i++) { // 暴力判断每个字符串中宽度j的循环节是否可行
     scanf("%s", s[i]);
     for (int j=1; j<=m; j++)
       if (st[j])
@@ -22,15 +22,15 @@ int main() {
           if (!st[j]) break;
         }
   }
-  int width;
-  for (int i=1; i<=m; i++) // 找到最小的循环节长度
+  int width; // 选择最小的width，则一定可以得到最小的height
+  for (int i=1; i<=m; i++) // 找到最小的，可以不完美覆盖每行的循环节长度
     if (st[i]) {
       width = i;
       break;
     }
-  for (int i=1; i<=n; i++) s[i][width] = 0;
-  for (int i=2, j=0; i<=n; i++) { // 对列做kmp算法
-    while (j && strcmp(s[i], s[j+1])) j = nxt[j];
+  for (int i=1; i<=n; i++) s[i][width] = 0; // '\0'
+  for (int i=2, j=0; i<=n; i++) { // 把每行看作一个字母，对列做kmp算法
+    while (j>0 && strcmp(s[i], s[j+1])) j = nxt[j];
     if (!strcmp(s[i], s[j+1])) j++;
     nxt[i] = j;
   }
