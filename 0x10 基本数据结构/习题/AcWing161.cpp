@@ -19,7 +19,7 @@ bool Phone_List() {
       int a = s[i][j] - '0';
       if (!trie[p][a]) trie[p][a] = ++tot;
       p = trie[p][a];
-      if (ed[p]) return 1; // 发现已有字符串是当前串的前缀
+      if (ed[p]) return 1; // 发现已有trie中串是当前串的前缀
     }
     for (int i=0; i<10; i++)
       if (trie[p][i]) return 1; // 发现当前串是其他trie中串的前缀
