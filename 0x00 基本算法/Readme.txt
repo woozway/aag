@@ -42,7 +42,7 @@ void bsearch_2() {
   int l = 0, r = n-1;
   while (l < r) {
     int mid = l+r+1 >> 1;
-    if (a[mid] <= k) l = mid;
+    if (check(mid)) l = mid;
     else r = mid-1;
   }
 }
