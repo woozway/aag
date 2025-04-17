@@ -1,4 +1,5 @@
 常用代码模版1：基础算法
+@yxc, https://www.acwing.com/blog/content/277/
 ---
 // 快速排序，快速选择
 void quick_sort(int l, int r) {
