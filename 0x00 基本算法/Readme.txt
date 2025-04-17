@@ -169,6 +169,14 @@ int find(int x) { // 找到第一个大于等于x的位置
   }
   return l+1; // 映射到1, 2, ...n
 }
+// // unique函数的原理
+// vector<int>::iterator unique(vector<int> &a) {
+//   int j = 0;
+//   for (int i=0; i<a.size(); i++)
+//     if (!i || a[i]!=a[i-1]) // 如果是第一个元素或者该元素不等于前一个元素，即不重复元素，我们就把它存到数组前j个元素中
+//       a[j++] = a[i]; // 每存在一个不同元素，j++
+//   return a.begin() + j; // 返回的是前j个不重复元素的下标
+// }
 
 // 区间合并
 void merge() {
