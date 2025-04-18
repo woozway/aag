@@ -25,7 +25,7 @@ void merge_sort(int l, int r) {
   int i = l, j = mid+1;
   for (int k=l; k<=r; k++)
     if (j>r || i<=mid && a[i]<=a[j]) b[k] = a[i++]; // 这里写<=才稳定
-    else b[k] = a[j++];
+    else b[k] = a[j++]; // b是用于中转的临时数组
   for (int k=l; k<=r; k++) a[k] = b[k];
 }
 
@@ -54,7 +54,7 @@ void bsearch_3() {
   l = -100, r = 100; // double eps = 1e-6
   while (r-l > 1e-8) { // 8=6+2
     double mid = (l+r) / 2;
-    if (mid*mid*mid < n) l = mid;
+    if (check(mid)) l = mid;
     else r = mid;
   }
 }
@@ -165,7 +165,7 @@ alls.erase(unique(alls.begin(), alls.end()), alls.end()); // 去掉重复元素
 int find(int x) { // 找到第一个大于等于x的位置
   int l = 0, r = alls.size()-1;
   while (l < r) {
-    int mid = l + r >> 1;
+    int mid = l+r >> 1;
     if (alls[mid] >= x) r = mid;
     else l = mid+1;
   }
