@@ -2,6 +2,7 @@
 @yxc, https://www.acwing.com/blog/content/277/
 ---
 
+```c++
 // 快速排序，快速选择
 void quick_sort(int l, int r) {
   if (l >= r) return; // >=，因为快排中区间内可能没有数
@@ -192,3 +193,4 @@ void merge() {
     }
   if (st != -2e9) ans.push_back({st, ed}); // 压入最后一个合并后的区间
 }
+```
