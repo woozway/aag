@@ -39,7 +39,6 @@ void bsearch_1() {
     else l = mid+1;
   }
 }
-
 void bsearch_2() {
   int l = 0, r = n-1;
   while (l < r) {
@@ -99,7 +98,6 @@ vector<int> mul(vector<int> &A, int b) {
   while (C.size()>1 && C.back()==0) C.pop_back();
   return C;
 }
-
 // // 大整数A>=0, B>=0
 // vector<int> mul(vector<int> &A, vector<int> &B) {
 //   vector<int> C(A.size()+B.size(), 0);
