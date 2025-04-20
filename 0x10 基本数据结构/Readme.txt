@@ -224,7 +224,7 @@ void up(int u) {
   }
 }
 // O(n)建堆
-for (int i = n / 2; i; i -- ) down(i);
+for (int i=n/2; i; i--) down(i);
 
 // 一般哈希
 // (1) 拉链法
