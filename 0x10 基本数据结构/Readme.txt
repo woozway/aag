@@ -4,21 +4,29 @@
 
 ```c++
 // 单链表
-// head存储链表头，e[]存储节点的值，ne[]存储节点的next指针，idx表示当前用到了哪个节点
-int head, e[N], ne[N], idx;
-// 初始化
-void init() {
-  head = -1;
-  idx = 0;
+// // head存储链表头，e[]存储节点的值，ne[]存储节点的next指针，idx表示当前用到了哪个节点
+// int head, e[N], ne[N], idx;
+// // 初始化
+// void init() {
+//   head = -1;
+//   idx = 0;
+// }
+// // 在链表头插入一个数a
+// void insert(int a) {
+//   e[idx] = a, ne[idx] = head, head = idx++;
+// }
+// // 将头结点删除，需要保证头结点存在
+// void remove() {
+//   head = ne[head];
+// }
+int e[N], ne[N], idx = 1; // 为统一逻辑，令节点0为dummy_head，ne[k]=0表示空
+void insert(int k, int a) { // 在第k个节点后插入一个节点
+  e[idx] = a, ne[idx] = ne[k], ne[k] = idx++;
 }
-// 在链表头插入一个数a
-void insert(int a) {
-  e[idx] = a, ne[idx] = head, head = idx++;
+void remove(int k) { // 删除第k个节点之后的一个节点
+  ne[k] = ne[ne[k]];
 }
-// 将头结点删除，需要保证头结点存在
-void remove() {
-  head = ne[head];
-}
+for (int i=ne[0]; i!=0; i=ne[i]) cout << e[i]; // 遍历
 
 // 双链表
 // e[]表示节点的值，l[]表示节点的左指针，r[]表示节点的右指针，idx表示当前用到了哪个节点
@@ -94,7 +102,7 @@ for (int i=1; i<=n; i++) {
 }
 
 // 单调队列
-常见模型：找出滑动窗口中的最大值/最小值
+// 常见模型：找出滑动窗口中的最大值/最小值
 int hh = 0, tt = -1;
 for (int i=0; i<n; i++) {
   while (hh<=tt && check_out(q[hh])) hh++; // 判断队头是否滑出窗口
@@ -102,7 +110,7 @@ for (int i=0; i<n; i++) {
   q[++tt] = i;
 }
 
-// KMP
+// KMP：可处理循环节
 // s[]是长文本，p[]是模式串，n是s的长度，m是p的长度
 // 求模式串的next数组：
 for (int i=2, j=0; i<=m; i++) {
@@ -204,7 +212,7 @@ d[find(a)] = distance; // 根据具体问题，初始化find(a)的偏移量
 int h[N], ph[N], hp[N], size;
 // 交换两个点，及其映射关系
 void heap_swap(int a, int b) {
-  swap(ph[hp[a]],ph[hp[b]]);
+  swap(ph[hp[a]], ph[hp[b]]);
   swap(hp[a], hp[b]);
   swap(h[a], h[b]);
 }
@@ -228,20 +236,17 @@ for (int i=n/2; i; i--) down(i);
 
 // 一般哈希
 // (1) 拉链法
-int h[N], e[N], ne[N], idx;
+int h[N], e[N], ne[N], idx = 1;
 // 向哈希表中插入一个数
 void insert(int x) {
   int k = (x%N + N) % N;
-  e[idx] = x;
-  ne[idx] = h[k];
-  h[k] = idx++;
+  e[idx] = x, ne[idx] = h[k], h[k] = idx++;
 }
 // 在哈希表中查询某个数是否存在
 bool find(int x) {
   int k = (x%N + N) % N;
-  for (int i=h[k]; i!=-1; i=ne[i])
-    if (e[i] == x)
-      return true;
+  for (int i=h[k]; i!=0; i=ne[i])
+    if (e[i] == x) return true;
   return false;
 }
 
@@ -266,7 +271,7 @@ ULL h[N], p[N]; // h[k]存储字符串前k个字母的哈希值, p[k]存储 P^k 
 p[0] = 1;
 for (int i=1; i<=n; i++) {
   h[i] = h[i-1]*P + str[i];
-  p[i] = p[i-1] * P;
+  p[i] = p[i-1] * P; // P取131或13331，经验值，冲突概率小
 }
 // 计算子串 str[l ~ r] 的哈希值
 ULL get(int l, int r) {
