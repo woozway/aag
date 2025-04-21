@@ -242,15 +242,16 @@ for (int i=n/2; i; i--) down(i);
 
 // 一般哈希
 // (1) 拉链法
+const int N = 1e5+10, P = 100003; // 随便找个大质数
 int h[N], e[N], ne[N], idx = 1;
 // 向哈希表中插入一个数
 void insert(int x) {
-  int k = (x%N + N) % N;
+  int k = (x%P + P) % P;
   e[idx] = x, ne[idx] = h[k], h[k] = idx++;
 }
 // 在哈希表中查询某个数是否存在
 bool find(int x) {
-  int k = (x%N + N) % N;
+  int k = (x%P + P) % P;
   for (int i=h[k]; i!=0; i=ne[i])
     if (e[i] == x) return true;
   return false;
