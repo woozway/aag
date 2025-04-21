@@ -164,7 +164,7 @@ int find(int x) {
 }
 // 初始化，假定节点编号是1~n
 for (int i=1; i<=n; i++) p[i] = i;
-// 合并a和b所在的两个集合：
+// 合并a和b所在的两个集合，b所在的集合的祖宗find(b)当两个集合的爸爸
 p[find(a)] = find(b);
 
 // (2) 维护size的并查集：
@@ -181,8 +181,11 @@ for (int i=1; i<=n; i++) {
   size[i] = 1;
 }
 // 合并a和b所在的两个集合：
-size[find(b)] += size[find(a)];
-p[find(a)] = find(b);
+int pa = find(a), pb = find(b);
+if (pa != pb) {
+  size[pb] += size[pa];
+  p[pa] = pb;
+}
 
 // (3) 维护到祖宗节点距离的并查集：
 // p[]存储每个点的祖宗节点, d[x]存储x到p[x]的距离
@@ -202,8 +205,11 @@ for (int i=1; i<=n; i++) {
   d[i] = 0;
 }
 // 合并a和b所在的两个集合：
-p[find(a)] = find(b);
-d[find(a)] = distance; // 根据具体问题，初始化find(a)的偏移量
+int pa = find(a), pb = find(b);
+if (pa != pb) {
+  p[pa] = pb;
+  d[pa] = distance; // 根据具体问题，初始化pa的偏移量
+}
 
 // 堆
 // h[N]存储堆中的值, h[1]是堆顶，x的左儿子是2x, 右儿子是2x + 1
