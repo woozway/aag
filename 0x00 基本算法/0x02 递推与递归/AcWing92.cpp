@@ -1,23 +1,22 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 int n;
-vector<int> chosen;
-void calc(int x) {
-  if (x == n+1) {
-    for (int i=0; i<chosen.size(); i++)
-      printf("%d ", chosen[i]);
-    puts("");
+
+void dfs(int u, int state) {
+  if (u == n) {
+    for (int i = 0; i < n; i ++ )
+      if (state >> i & 1)
+        cout << i + 1 << ' ';
+    cout << endl;
     return;
-  }    
-  calc(x+1);
-  chosen.push_back(x);
-  calc(x+1);
-  chosen.pop_back();
+  }
+
+  dfs(u + 1, state);
+  dfs(u + 1, state + (1 << u));
 }
 
 int main() {
   cin >> n;
-  calc(1);
+  dfs(0, 0);
   return 0;
 }

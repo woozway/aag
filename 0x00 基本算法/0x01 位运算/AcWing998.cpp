@@ -1,34 +1,27 @@
-#include <cstdio>
 #include <iostream>
 using namespace std;
-int n, m;
-pair<string, int> a[100005];
-int calc(int bit, int now) {
-  for (int i=1; i<=n; i++) {
-    int x = a[i].second >> bit & 1;
-    if (a[i].first == "AND") now &= x;
-    else if (a[i].first == "OR") now |= x;
-    else now ^= x;
-  }
-  return now;
-}
 
 int main() {
+  cin.tie(0)->sync_with_stdio(0);
+  int n, m;
   cin >> n >> m;
-  for (int i=1; i<=n; i++) {
-    char str[5]; int x;
-    scanf("%s%d", str, &x);
-    a[i] = make_pair(str, x);
+
+  int _0 = 0, _1 = -1; // 每位上全0和全1
+  while (n -- ) {
+    int x;
+    string op;
+    cin >> op >> x;
+
+    if (op[0] == 'A') _0 &= x, _1 &= x;
+    if (op[0] == 'X') _0 ^= x, _1 ^= x;
+    if (op[0] == 'O') _0 |= x, _1 |= x;
   }
-  int val = 0, ans = 0;
-  for (int bit=29; bit>=0; bit--) {
-    int res0 = calc(bit, 0);
-    int res1 = calc(bit, 1);
-    if (val + (1<<bit) <= m && res0 < res1)
-      val += 1 << bit, ans += res1 << bit;
-    else 
-      ans += res0 << bit;
-  }
-  cout << ans;
+
+  int res = 0; // 每位独立，可以贪心，让伤害最大
+  for (int i = 29; ~i; i -- ) // 本题中m最大是10^9，lg2(10^9) = 3log2(10^3) < 30
+    if (_0>>i & 1) res += 1 << i; // 说明初始数的该位上填0，经过n道门后是1
+    else if (_1>>i & 1 && (1 << i) <= m) res += 1 << i, m -= 1 << i;
+
+  cout << res << endl;
   return 0;
 }

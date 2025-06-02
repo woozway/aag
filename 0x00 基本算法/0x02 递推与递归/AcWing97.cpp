@@ -1,54 +1,44 @@
 #include <iostream>
-#include <vector>
-// #define ll long long
 using namespace std;
-typedef long long ll;
-const ll P = 9901;
-vector<pair<ll, ll> > w;
-// 快速幂计算a**b
-ll ksm(ll a, ll b) {
-  ll ans = 1;
-  a %= P;
-  while (b) {
-    if (b & 1) (ans *= a) %= P;
-    (a *= a) %= P;
-    b >>= 1;
+const int mod = 9901;
+
+int qmi(int a, int k) {
+  a %= mod;
+  int res = 1;
+  while (k) {
+    if (k & 1) res = res * a % mod;
+    a = a * a % mod;
+    k >>= 1;
   }
-  return ans;
-}
-// 计算：1 + p + p^2 + .. + p^c
-ll get_sum(ll p, ll c) {
-  if (!p) return 0; // 0也可能是约数
-  if (!c) return 1;
-  if (c & 1) return (1 + ksm(p, (c+1)/2)) * get_sum(p, (c-1)/2) % P;
-  return ((1 + ksm(p, c/2)) * get_sum(p, c/2-1) + ksm(p, c)) % P;
-}
-// 从[2,floor(sqrt(a))]，找到每一个a的质因子，并记录个数
-// 1不是质因子，但是是约数，后面会统一处理
-void fj(ll a) {
-  for (int i=2; i*i<=a; i++) {
-    if (!(a % i)) {
-      ll num = 0;
-      while (!(a % i)) {
-        num++;
-        a /= i;
-      }
-      w.push_back(make_pair(i, num));
-    }
-  }
-  if (a != 1) w.push_back(make_pair(a, 1));
+  return res;
 }
 
+// sum(p, k) = p^0 + p^1 + ... + p^k
+//           = (p^0 + .. + p^(k/2)) + (p^(k/2+1) + .. + p^k)
+//           = (p^0 + .. + p^(k/2)) + p^(k/2+1) * (p^0 + .. + p^(k/2))
+//           = (1 + p^(k/2+1)) * sum(p, k / 2)
+int sum(int p, int k) {
+  if (k == 0) return 1;
+  if (k % 2 == 0) return (p % mod * sum(p, k - 1) % mod + 1) % mod;
+  return (1 + qmi(p, k / 2 + 1)) % mod * sum(p, k / 2) % mod;
+}
+
+// 对A分解质因数：A = p1^k1 * p2^k2 * ... * pn^kn
+// 约数个数：(k1 + 1) * (k2 + 1) * ... * (kn + 1)
+// 约数之和：(p1^0 + p1^1 +...+ p1^n) * (p2^0 +...+ p2^n) *...* (pn^0 +...+ pn^n)
 int main() {
-  ll a, b;
-  cin >> a >> b;
-  fj(a); // 分解a的质因子，存入w
-  ll ans = 1;
-  for (ll i=0; i<w.size(); i++) {
-    ll p = w[i].first, c = w[i].second;
-    (ans *= get_sum(p, b*c)) %= P;
+  int A, B;
+  cin >> A >> B;
+
+  int res = 1;
+  for (int i = 2; i <= A; i ++ ) {
+    int s = 0;
+    while (A % i == 0) s ++ , A /= i;
+
+    if (s) res = res * sum(i, s * B) % mod;
   }
-  if (ans < 0) ans += P;
-  cout << ans;
+
+  if (!A) res = 0;
+  cout << res << endl;
   return 0;
 }

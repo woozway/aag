@@ -1,29 +1,26 @@
-#include <iostream>
 #include <vector>
+#include <iostream>
 using namespace std;
 int n;
-int order[20];
-bool chosen[20];
+vector<int> path;
 
-void calc(int k) {
-  if (k == n+1) {
-    for (int i=1; i<=n; i++)
-      printf("%d ", order[i]);
-    puts("");
+void dfs(int u, int state) {
+  if (u == n) {
+    for (auto x : path) cout << x << ' ';
+    cout << endl;
     return;
   }
-  for (int i=1; i<=n; i++) {
-    if (chosen[i]) continue;
-    order[k] = i;
-    chosen[i] = 1;
-    calc(k+1);
-    chosen[i] = 0;
-    order[k] = 0;
-  }
+
+  for (int i = 0; i < n; i ++ )
+    if (!(state >> i & 1)) {
+      path.push_back(i + 1);
+      dfs(u + 1, state + (1 << i));
+      path.pop_back();
+    }
 }
 
 int main() {
   cin >> n;
-  calc(1);
+  dfs(0, 0);
   return 0;
 }

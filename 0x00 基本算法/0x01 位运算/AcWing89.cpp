@@ -1,18 +1,18 @@
 #include <iostream>
 using namespace std;
-
-int power(int a, int b, int p) {
-  int ans = 1 % p;
-  for (; b; b>>=1) {
-    if (b&1) ans = (long long)ans * a % p;
-    a = (long long)a * a % p;
-  }
-  return ans;
-}
+typedef long long LL;
 
 int main() {
   int a, b, p;
   cin >> a >> b >> p;
-  cout << power(a, b, p);
+
+  int res = 1 % p;
+  while (b) {
+    if (b & 1) res = (LL)res * a % p;
+    a = (LL)a * a % p;
+    b >>= 1;
+  }
+
+  cout << res << endl;
   return 0;
 }
